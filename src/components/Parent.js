@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Child from './Child'
+import ChildComp from './Child'
 
 export class Parent extends Component{
     render() {
@@ -11,7 +11,7 @@ export class Parent extends Component{
                 <div key={blog.id}>
                     <h2> Blog Title: <u>{blog.title}</u></h2>
                     {/* Invoking Child component for getting the active comments(CONDITIONAL RENDERING) */}
-                    <Child id={blog.id} comments={this.props.comments}></Child>
+                    <ChildComp id={blog.id} comments={this.props.comments}></ChildComp>
                     </div>
                     )}
             </div>

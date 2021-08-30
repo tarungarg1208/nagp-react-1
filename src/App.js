@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import Parent from './component/Parent'
+import ParentComp from './components/Parent'
 import { blogs } from './blog_data'
 import { comments } from './blog_data'
 
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <h1><u>NAGP ASSIGNMENT</u></h1>
       {/* Passing blogs and comments as props */}
-      <Parent blogs={blogs} comments={comments} message="TARUN GARG"></Parent>
+      <ParentComp blogs={blogs} comments={comments} message="TARUN GARG"></ParentComp>
     </div>
   );
 }
