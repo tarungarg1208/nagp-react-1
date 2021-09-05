@@ -1,4 +1,4 @@
-function Child(props) {
+function CommentsComponent(props) {
     const prop_id = props.id
 
     const comments = props.comments;
@@ -14,4 +14,4 @@ function Child(props) {
     )
 }
 
-export default Child
+export default CommentsComponent

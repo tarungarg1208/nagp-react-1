@@ -1,28 +1,14 @@
 import React, { useState } from 'react';
 
 
-const BlogForm = () => {
+const BlogForm = (props) => {
     const [enteredBlogId, setEnteredBlogId] = useState('');
     const [enteredBlogTitle, setEnteredBlogTitle] = useState('');
     const [enteredBlogDescription, setEnteredBlogDescription] = useState('');
 
     const addUserHandler = (event) => {
         event.preventDefault();
-        // if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
-        //     setError({
-        //         title: 'Invalid input',
-        //         message: 'Please enter a valid name and age (non-empty values).',
-        //     });
-        //     return;
-        // }
-        // if (+enteredAge < 1) {
-        //     setError({
-        //         title: 'Invalid age',
-        //         message: 'Please enter a valid age (> 0).',
-        //     });
-        //     return;
-        // }
-        // props.onAddUser(enteredUsername, enteredAge);
+
         let old_blogs = JSON.parse(localStorage.getItem('blogs'))
         console.log(old_blogs)
         let new_blog_info = {
@@ -30,8 +16,17 @@ const BlogForm = () => {
             "title": enteredBlogTitle,
             "description": enteredBlogDescription
         }
-        console.log(new_blog_info)
-        // localStorage.setItem('blogs',JSON.stringify(new_blog_info))
+        var new_data = [];
+        new_data.push(new_blog_info)
+        if (old_blogs) {
+            for (var i = 0; i < old_blogs.length; i++) {
+                if (old_blogs[i]['id'] != new_blog_info['id'])
+                    new_data.push(old_blogs[i]);
+            }
+        }
+        console.log("CALLING PROP UPDATE")
+        props.updateBlog(new_data);
+        localStorage.setItem('blogs', JSON.stringify(new_data))
         setEnteredBlogId('');
         setEnteredBlogTitle('');
         setEnteredBlogDescription('');
@@ -48,11 +43,8 @@ const BlogForm = () => {
         setEnteredBlogDescription(event.target.value);
     };
 
-
     return (
         <div>
-
-
             <form onSubmit={addUserHandler}>
                 <h1><i>Use me to update/add blogs</i></h1>
                 <label htmlFor="blogid">Blog ID</label>
@@ -74,7 +66,7 @@ const BlogForm = () => {
                 <label htmlFor="description">Blog Description</label>
                 <input
                     id="description"
-                    type="testr"
+                    type="text"
                     value={enteredBlogDescription}
                     onChange={blogDescriptionChangeHandler}
                 />
